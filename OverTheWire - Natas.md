@@ -7,8 +7,7 @@ Cliquem a la url que ens apareix i hi entrem amb les credencials que ens donen:
   
 Mirem el codi font i allà trobem la password per el level 1
 
-
-![](file:///C:/Users/pmpol/AppData/Local/Temp/lu10980mefb4.tmp/lu10980mefb7_tmp_dba7eb0139d35042.png)  
+![image](https://github.com/PolMuri/OverTheWire---Natas/assets/109922379/226c6b07-eb18-43de-9473-1872776be6c2)
 
 ``g9D9cREhslqBKtcA2uocGHPfMZVzeFK6``
 
@@ -20,8 +19,7 @@ Aquí han bloquejat el click dret només al requadre blanc, a la resta de la pà
 
 Per anar al level 2 ens passa el mateix, si mirem el codi font amb ctrl + u veiem la password de natas2:
 
-
-![](file:///C:/Users/pmpol/AppData/Local/Temp/lu10980mefb4.tmp/lu10980mefb7_tmp_ac3a6a56d043112.png)  
+![image](https://github.com/PolMuri/OverTheWire---Natas/assets/109922379/04f8e892-e5a9-4f2e-97fc-45e39eec0461)
 
 
 ``h4ubbcXrWqsTo7GGnnUMLppXbOogfBZ7``
@@ -34,23 +32,26 @@ Per anar al level 2 ens passa el mateix, si mirem el codi font amb ctrl + u veie
 Podem veure que per veure el codi font de la pàgina també podem posar view-source davant de qualsevol url:
 
 
-![](file:///C:/Users/pmpol/AppData/Local/Temp/lu10980mefb4.tmp/lu10980mefb7_tmp_bd673bbfca9bc9c7.png)  
+![image](https://github.com/PolMuri/OverTheWire---Natas/assets/109922379/eb298805-d087-4fb6-bbc2-54f56fc85505)
+  
 
   
 Ara al codi font hi veiem la password de natas2, però podem veure si ens hi fixem que a la linia 10 hi ha un div que carrega una imatge de la carpeta files:
 
 
-![](file:///C:/Users/pmpol/AppData/Local/Temp/lu10980mefb4.tmp/lu10980mefb7_tmp_c12cddc1fe3896a.png)  
+![image](https://github.com/PolMuri/OverTheWire---Natas/assets/109922379/7a28ace3-1290-494d-9566-b1cf93ec57d6)
+
 
 
 I si anem al directori files:
 
-![](file:///C:/Users/pmpol/AppData/Local/Temp/lu10980mefb4.tmp/lu10980mefb7_tmp_c3b6659ecc4751.png)  
+![image](https://github.com/PolMuri/OverTheWire---Natas/assets/109922379/c52e5e86-6a5f-4a06-9aef-25092ffee865)
+
 
   
 Hi ha un fitxer.txt amb els usuaris i contrasenyes:
 
-![](file:///C:/Users/pmpol/AppData/Local/Temp/lu10980mefb4.tmp/lu10980mefb7_tmp_2a1807041037e858.png)  
+![image](https://github.com/PolMuri/OverTheWire---Natas/assets/109922379/acd7019a-8410-442a-bf08-39575dbeb9c1)
 
   
 **Error:** Al servidor Apache tenen posada l’opció +indexes i degut a això podem veure aquest directori, la solució és anar al virtualhost d’aquesta pagina i al +indexes posar-hi en comptes d’un + un -.
@@ -60,26 +61,30 @@ Tampoc han amagat la versió del servidor de producció. Mai s’han de deixar e
 -**Level 3**:
 
 
-![](file:///C:/Users/pmpol/AppData/Local/Temp/lu10980mefb4.tmp/lu10980mefb7_tmp_d14aa84038edf000.png)  
+![image](https://github.com/PolMuri/OverTheWire---Natas/assets/109922379/d9e55139-d9a0-41cb-86bf-a20318b1958d)
+
 
 
 No veiem res, anirem a mirar si existeix el fitxer robots.txt:
 
 
-![](file:///C:/Users/pmpol/AppData/Local/Temp/lu10980mefb4.tmp/lu10980mefb7_tmp_4b268d7aed168fcd.png)  
+![image](https://github.com/PolMuri/OverTheWire---Natas/assets/109922379/fa890ebf-d711-447d-81b0-9d727661b07d)
+
 
 
 Primer ens especifica qui (al haver-hi un asterisc vol dir que per tots els robots) els hi veta que puguin entrar a s3cr3t, gràcies a això a Google no hi està indexat aquest directori. Nosaltres hi entrarem:
 
 
-![](file:///C:/Users/pmpol/AppData/Local/Temp/lu10980mefb4.tmp/lu10980mefb7_tmp_b56c99416fa90c11.png)  
+![image](https://github.com/PolMuri/OverTheWire---Natas/assets/109922379/bc55b2f2-6a2f-48c6-906a-479fcc7f0eef)
+
 
 I tornem a veure un fitxer users.txt que conté la password del següent nivell.
 
 Podriem haver trobat el directori si no amb dirbuster o gobuster.
 
 
-![](file:///C:/Users/pmpol/AppData/Local/Temp/lu10980mefb4.tmp/lu10980mefb7_tmp_d723050bde359f51.png)  
+![image](https://github.com/PolMuri/OverTheWire---Natas/assets/109922379/a1ab1a78-5a98-402f-ab01-98be03238ed6)
+
   
 ``tKOcJIbzM4lTs8hbCmzn5Zr4434fGZQm``
 
@@ -91,23 +96,27 @@ Podriem haver trobat el directori si no amb dirbuster o gobuster.
 Ara utilizem el BurpSuite per fer aquest nivell.
 
   
-![](file:///C:/Users/pmpol/AppData/Local/Temp/lu10980mefb4.tmp/lu10980mefb7_tmp_83a62829ad81ffca.png)  
+![image](https://github.com/PolMuri/OverTheWire---Natas/assets/109922379/45078849-632f-4dd4-a42e-841fed8a5f14)
+
 
 Ara interceptem la petició ja que hem clicat a Refresh page:
 
 
-![](file:///C:/Users/pmpol/AppData/Local/Temp/lu10980mefb4.tmp/lu10980mefb7_tmp_473b89e187af38ba.png)  
+![image](https://github.com/PolMuri/OverTheWire---Natas/assets/109922379/717c3ad7-b046-4c4f-973e-468ddc12ae94)
+ 
 
 Com que se’ns demana provenir de la pàgina natas5, a Referer canviem el 4 per el 5 i fem forward:
   
 
-![](file:///C:/Users/pmpol/AppData/Local/Temp/lu10980mefb4.tmp/lu10980mefb7_tmp_642467809f5c3a6.png)  
+![image](https://github.com/PolMuri/OverTheWire---Natas/assets/109922379/6cfe520c-7580-48b7-9e06-a672d4ecda1c)
+
 
 
 I ara ja se’ns mostra la password per accedir a natas5:
 
 
-![](file:///C:/Users/pmpol/AppData/Local/Temp/lu10980mefb4.tmp/lu10980mefb7_tmp_3fa05a7643a2617f.png)  
+![image](https://github.com/PolMuri/OverTheWire---Natas/assets/109922379/30f59982-7a38-4450-83f2-12667cad9696)
+  
 
   
 ``Z0NsrtIkJoKALBCLi5eqFfcRN82Au2oD``
@@ -120,24 +129,28 @@ I ara ja se’ns mostra la password per accedir a natas5:
 Interceptem la petició amb burpsuit, i veiem un missatge a la pàgina que ens diu que no estem loguejats:
 
 
-![](file:///C:/Users/pmpol/AppData/Local/Temp/lu10980mefb4.tmp/lu10980mefb7_tmp_fde2355cac94c6c0.png)  
+![image](https://github.com/PolMuri/OverTheWire---Natas/assets/109922379/c40f13c4-c81a-4a9e-9df2-f6e9174b8e18)
+
 
 Al interceptar-lo veiem que la cookie que controla el login està a 0:
 
   
 
-![](file:///C:/Users/pmpol/AppData/Local/Temp/lu10980mefb4.tmp/lu10980mefb7_tmp_cc7d153eb8d628eb.png)  
+![image](https://github.com/PolMuri/OverTheWire---Natas/assets/109922379/cd79057d-d63d-42d4-a20a-8f7868b0c399)
+
 
 
 Si la posem a 1, actua com un boleà i ens permet fer login:
 
 
-![](file:///C:/Users/pmpol/AppData/Local/Temp/lu10980mefb4.tmp/lu10980mefb7_tmp_807bcc084b7bc4e8.png)  
+![image](https://github.com/PolMuri/OverTheWire---Natas/assets/109922379/82398407-4f70-4444-9d15-6138e2a76cc5)
+
 
 Cliquem forward i se’ns mostra la contrasenya per accediral level 6:
 
 
-![](file:///C:/Users/pmpol/AppData/Local/Temp/lu10980mefb4.tmp/lu10980mefb7_tmp_8bad8b2ab0030f50.png)  
+![image](https://github.com/PolMuri/OverTheWire---Natas/assets/109922379/bf3727a9-2971-4543-a787-f87f3bce00b9)
+ 
 
 ``fOIvE0MDtPTgRhqmmvvAOt2EfXR6uQgR``
 
@@ -148,12 +161,14 @@ Cliquem forward i se’ns mostra la contrasenya per accediral level 6:
 
 Ara tenim la pantalla següent:
 
-![](file:///C:/Users/pmpol/AppData/Local/Temp/lu10980mefb4.tmp/lu10980mefb7_tmp_a121c30f9298d3f7.png)  
+![image](https://github.com/PolMuri/OverTheWire---Natas/assets/109922379/ff8d4b15-4fdf-4612-beca-68f797bd2fbc)
+ 
 
 Amb un camp d’input on s’ha de posar un secret, ens donen un enllaç per veure el codi font:
 
 
-![](file:///C:/Users/pmpol/AppData/Local/Temp/lu10980mefb4.tmp/lu10980mefb7_tmp_284729e7edbcfcf2.png)  
+![image](https://github.com/PolMuri/OverTheWire---Natas/assets/109922379/d655e860-35ba-489c-ae12-8d47794bd8ad)
+ 
 
 Aquí veiem un codi PHP, a include veiem la ruta on podem trobar el secret, i si ens hi fixem si tenim el secret se’ns pintarà la password de natas 7.
 
@@ -163,11 +178,13 @@ Per tant anem al directori includes/secret.inc i fem ctrl +u i aconseguim el sec
 
 Ara posem el secret que hem trobat a l’input i així se’ns mostrarà la contrasenya de natas 7:
 
-![](file:///C:/Users/pmpol/AppData/Local/Temp/lu10980mefb4.tmp/lu10980mefb7_tmp_6c24614424991ebb.png)  
+![image](https://github.com/PolMuri/OverTheWire---Natas/assets/109922379/7dbf0964-9edd-4701-a19e-e3137388373c)
+  
 
   
 
-![](file:///C:/Users/pmpol/AppData/Local/Temp/lu10980mefb4.tmp/lu10980mefb7_tmp_8d5e042b6d556a8.png)  
+![image](https://github.com/PolMuri/OverTheWire---Natas/assets/109922379/fb68adaf-070d-4c44-9dcd-0dfbbb75bd5b)
+
 
   
 ``jmxSiH3SP6Sonf8dv66ng8v1cIEdjXWr``
@@ -180,21 +197,25 @@ Ara posem el secret que hem trobat a l’input i així se’ns mostrarà la cont
 Veiem una pàgina que té indexat una altra pàgina, una Home i una About:
 
 
-![](file:///C:/Users/pmpol/AppData/Local/Temp/lu10980mefb4.tmp/lu10980mefb7_tmp_8c11d54377fe5332.png)  
+![image](https://github.com/PolMuri/OverTheWire---Natas/assets/109922379/8cc52c51-2055-426d-ba58-db06a3852187)
+
 
 Fem un ctrl + u i veiem que carrega les pàgines amb un argument, per tant aquí podrem injectar:
 
   
 
-![](file:///C:/Users/pmpol/AppData/Local/Temp/lu10980mefb4.tmp/lu10980mefb7_tmp_95be142f96f40b06.png)  
+![image](https://github.com/PolMuri/OverTheWire---Natas/assets/109922379/c9019466-5abc-4141-8aaf-e0f1ed5beaf3)
+
 
   
 
-![](file:///C:/Users/pmpol/AppData/Local/Temp/lu10980mefb4.tmp/lu10980mefb7_tmp_591d2d7480ee7b50.png)  
+![image](https://github.com/PolMuri/OverTheWire---Natas/assets/109922379/19befab7-b50e-48ea-8dee-6b6b749e5a39)
+  
 
 Com veiem ens donen una ruta, és un pass traversal per això mai s’ha de passar com a argument a la url el destí on hem d’anar:
 
-![](file:///C:/Users/pmpol/AppData/Local/Temp/lu10980mefb4.tmp/lu10980mefb7_tmp_b9e134fb60650f66.png)  
+![image](https://github.com/PolMuri/OverTheWire---Natas/assets/109922379/dcedd09d-28ab-40ad-8244-9575743fa77d)
+
 
 I ja tenim la password:
 
@@ -208,13 +229,15 @@ I ja tenim la password:
 Veiem una pàgina amb un input com al Level 6:
 
 
-![](file:///C:/Users/pmpol/AppData/Local/Temp/lu10980mefb4.tmp/lu10980mefb7_tmp_d500eb536618df5a.png)  
+![image](https://github.com/PolMuri/OverTheWire---Natas/assets/109922379/6e5fbab9-b2f4-4cb4-97f8-0c4f71453627)
+
 
   
 I un enllaç per veure el codi font i hi podem veure el codi PHP:
 
 
-![](file:///C:/Users/pmpol/AppData/Local/Temp/lu10980mefb4.tmp/lu10980mefb7_tmp_1e537406eb6cde7e.png)  
+![image](https://github.com/PolMuri/OverTheWire---Natas/assets/109922379/f1b7745b-b424-41e7-b113-bed71a98f16c)
+ 
 
   
 
@@ -222,47 +245,55 @@ Ara aquí tenim el secret encriptat. Veiem una funció que diu encode secret, en
 
 Fem un programa per desencriptar-ho:
 
-![](file:///C:/Users/pmpol/AppData/Local/Temp/lu10980mefb4.tmp/lu10980mefb7_tmp_305a58102154c6d8.png)  
+![image](https://github.com/PolMuri/OverTheWire---Natas/assets/109922379/637c913f-8d3e-405b-baed-2c3e5a0b8003)
+  
 
 
 I tenim el resultat: ``oubWYf2kBq``
 
 Ara ja tenim el secret i el posem a l’input:
 
-![](file:///C:/Users/pmpol/AppData/Local/Temp/lu10980mefb4.tmp/lu10980mefb7_tmp_dcc226f72dcd3942.png)  
+![image](https://github.com/PolMuri/OverTheWire---Natas/assets/109922379/09593ee7-d8c3-46a7-b199-0b566ed95c7d)
+
 
 I ja tenim la password:
 
 ``Sda6t0vkOPkM8YeOZkAGVhFoaplvlJFd``
 
-![](file:///C:/Users/pmpol/AppData/Local/Temp/lu10980mefb4.tmp/lu10980mefb7_tmp_72009511262a3c1c.png)  
+![image](https://github.com/PolMuri/OverTheWire---Natas/assets/109922379/95353466-6c10-4366-9124-2db90ed0f2a4)
+ 
 
 -**Level 9:**
 
 Si mirem el codi font no en treiem res am ctrl+u, per tant cliquem a View sourcecode:
 
-![](file:///C:/Users/pmpol/AppData/Local/Temp/lu10980mefb4.tmp/lu10980mefb7_tmp_49476463f9896269.png)  
+![image](https://github.com/PolMuri/OverTheWire---Natas/assets/109922379/b2a82934-1009-4b25-9142-2c1eb3aa3d68)
+ 
 
 I ara sí que veiem el codi:
 
-![](file:///C:/Users/pmpol/AppData/Local/Temp/lu10980mefb4.tmp/lu10980mefb7_tmp_a3fb1f144aa2fdbb.png)  
+![image](https://github.com/PolMuri/OverTheWire---Natas/assets/109922379/0245c95e-6ee0-492a-be6f-976aad8038b5)
+ 
 
 Ens haurem de barallar amb grep, -i vol dir que ens ho busqui ant amb majúscules com amb minúscules. Si poem a ens troba tot de paraules que contenen la paraula a:
 
 
-![](file:///C:/Users/pmpol/AppData/Local/Temp/lu10980mefb4.tmp/lu10980mefb7_tmp_cedb04fcada9ceae.png)  
+![image](https://github.com/PolMuri/OverTheWire---Natas/assets/109922379/241943f4-c732-4785-9f0b-52bfcbce506e)
+ 
 
 Tal i com està feta la pàgina està feta per no deixar-nos sortir del diccionari.
 
 A nivell de bash script hem de separar i posar dues comandes amb ; que executarà grep -i després ; i després executarà la comanda que nosaltres vulguem. Posem ;ls /etc/natas_wepass:
 
 
-![](file:///C:/Users/pmpol/AppData/Local/Temp/lu10980mefb4.tmp/lu10980mefb7_tmp_156d9999fe3704c7.png)  
+![image](https://github.com/PolMuri/OverTheWire---Natas/assets/109922379/eaefa30a-72de-49d2-b463-a89d3884d88a)
+
 
 
 El nostre usuari és natas9 i podem accedir al fitxer natas9 i al natas10, aquest últim degut al grup. Hem posat ;cat /etc/natas_webpass/natas10:
 
-![](file:///C:/Users/pmpol/AppData/Local/Temp/lu10980mefb4.tmp/lu10980mefb7_tmp_a13ce12f1a61994a.png)  
+![image](https://github.com/PolMuri/OverTheWire---Natas/assets/109922379/8e9e19c4-0637-403b-92f3-032c484ebfcd)
+
 
   
 
@@ -272,19 +303,23 @@ El nostre usuari és natas9 i podem accedir al fitxer natas9 i al natas10, aques
 
 **Level 10**
 
-![](file:///C:/Users/pmpol/AppData/Local/Temp/lu10980mefb4.tmp/lu10980mefb7_tmp_cc7198ef3c51e667.png)  
+![image](https://github.com/PolMuri/OverTheWire---Natas/assets/109922379/d80dae22-796e-44b2-9e78-332c1b42d932)
+
 
 Al codi font veiem com han anulat el ; la / etc:
 
 
-![](file:///C:/Users/pmpol/AppData/Local/Temp/lu10980mefb4.tmp/lu10980mefb7_tmp_96d737ffda94df36.png)  
+![image](https://github.com/PolMuri/OverTheWire---Natas/assets/109922379/fa7f54c8-688e-4548-b57d-db99950e41ad)
+ 
 
 Primer buscarem un valor vàlid i després li direm al fitxer que volem buscar (en comptes dal ditcionary.txt)
 
-![](file:///C:/Users/pmpol/AppData/Local/Temp/lu10980mefb4.tmp/lu10980mefb7_tmp_245b92cc423bb8a8.png)  
+![image](https://github.com/PolMuri/OverTheWire---Natas/assets/109922379/d135b981-a331-4636-b63c-53c88a34faf1)
 
 
-![](file:///C:/Users/pmpol/AppData/Local/Temp/lu10980mefb4.tmp/lu10980mefb7_tmp_dab426f74693ece9.png)  
+
+![image](https://github.com/PolMuri/OverTheWire---Natas/assets/109922379/7b073d1e-2bc2-4a5f-8f52-9f7e510e3afc)
+
 
   
 ``1KFqoJXi6hRaPluAmk8ESDW4fSysRoIg``
@@ -296,17 +331,20 @@ I ja tenim la password, hem tingut sort perquè a la contrasenya hi ha una a. He
 -**Level 11**
 
 
-![](file:///C:/Users/pmpol/AppData/Local/Temp/lu10980mefb4.tmp/lu10980mefb7_tmp_22ce976115e328a6.png)  
+![image](https://github.com/PolMuri/OverTheWire---Natas/assets/109922379/7162c7ec-418e-4a30-8b30-80bca365458b)
+ 
 
 
 Si cliquem a View sourcecode:
 
-![](file:///C:/Users/pmpol/AppData/Local/Temp/lu10980mefb4.tmp/lu10980mefb7_tmp_d80e49915f03f718.png)  
+![image](https://github.com/PolMuri/OverTheWire---Natas/assets/109922379/5360ab2b-310e-4c05-8494-586b8d7fb1cd)
+ 
 
 
 Si la cookie estigués només en base64 la podríem desencriptar amb el burpsuite mateix:
 
-![](file:///C:/Users/pmpol/AppData/Local/Temp/lu10980mefb4.tmp/lu10980mefb7_tmp_7df3a86e0836bdcd.png)  
+![image](https://github.com/PolMuri/OverTheWire---Natas/assets/109922379/1e3342a2-5dd6-48d1-9e96-c1f46abc638f)
+
 
 I ja tenim la cookie també:
 
@@ -327,7 +365,8 @@ Ara per tant necessitarem un editor de PHP i tirar aquest codi perquè ens doni 
 
   
 
-![](file:///C:/Users/pmpol/AppData/Local/Temp/lu10980mefb4.tmp/lu10980mefb7_tmp_4a89a16714752e1c.png)  
+![image](https://github.com/PolMuri/OverTheWire---Natas/assets/109922379/95efbeb9-effb-4171-912f-d8b97f92c5b4)
+ 
 
   
 
@@ -343,10 +382,12 @@ La cookie que ens dona el codi anterior: ``MGw7JCQ5OC04PT8jOSpqdmk3LT9pYmouLC0nI
 Ara canviem la cookie des de Burpsuite per exemple i ja obtenim la contrasenya:
 
 
-![](file:///C:/Users/pmpol/AppData/Local/Temp/lu10980mefb4.tmp/lu10980mefb7_tmp_e806269c81cffdae.png)  
+![image](https://github.com/PolMuri/OverTheWire---Natas/assets/109922379/4478fe5e-e4da-40ee-8a5f-9ab1d7d6089b)
 
 
-![](file:///C:/Users/pmpol/AppData/Local/Temp/lu10980mefb4.tmp/lu10980mefb7_tmp_c068bd579a7e0789.png)  
+
+![image](https://github.com/PolMuri/OverTheWire---Natas/assets/109922379/a4b97972-9e15-4474-a52f-841a5bd36e06)
+
 
 
 ``YWqo0pjpcXzSIl5NMAVxg12QxeC1w9QG``
@@ -358,7 +399,8 @@ Es podria solucionar fent servir una clau pública i privada per encriptar la co
 
 -**Level 12**
 
-![](file:///C:/Users/pmpol/AppData/Local/Temp/lu10980mefb4.tmp/lu10980mefb7_tmp_ec8986130d099d5b.png)  
+![image](https://github.com/PolMuri/OverTheWire---Natas/assets/109922379/e82eebcd-bfba-4ac6-bcbf-59e951b5836a)
+  
 
 ```<html>   <head>   <!-- This stuff in the header has nothing to do with the level -->   <link rel="stylesheet" type="text/css" href="http://natas.labs.overthewire.org/css/level.css">   <link rel="stylesheet" href="http://natas.labs.overthewire.org/css/jquery-ui.css" />   <link rel="stylesheet" href="http://natas.labs.overthewire.org/css/wechall.css" />   <script src="http://natas.labs.overthewire.org/js/jquery-1.9.1.js"></script>   <script src="http://natas.labs.overthewire.org/js/jquery-ui.js"></script>   <script src=http://natas.labs.overthewire.org/js/wechall-data.js></script><script src="http://natas.labs.overthewire.org/js/wechall.js"></script>   <script>var wechallinfo = { "level": "natas12", "pass": "<censored>" };</script></head>   <body>   <h1>natas12</h1>   <div id="content">   ``<?php      ``function` `genRandomString``() {`    `$length` `=` `10``;`    `$characters` `=` `"0123456789abcdefghijklmnopqrstuvwxyz"``;`    `$string` `=` `""``;          for (``$p` `=` `0``;` `$p` `<` `$length``;` `$p``++) {`        `$string` `.=` `$characters``[``mt_rand``(``0``,` `strlen``(``$characters``)-``1``)];       }          return` `$string``;   }      function` `makeRandomPath``(``$dir``,` `$ext``) {       do {`    `$path` `=` `$dir``.``"/"``.``genRandomString``().``"."``.``$ext``;       } while(``file_exists``(``$path``));       return` `$path``;   }      function` `makeRandomPathFromFilename``(``$dir``,` `$fn``) {`    `$ext` `=` `pathinfo``(``$fn``,` `PATHINFO_EXTENSION``);       return` `makeRandomPath``(``$dir``,` `$ext``);   }      if(``array_key_exists``(``"filename"``,` `$_POST``)) {`    `$target_path` `=` `makeRandomPathFromFilename``(``"upload"``,` `$_POST``[``"filename"``]);                 if(``filesize``(``$_FILES``[``'uploadedfile'``][``'tmp_name'``]) >` `1000``) {           echo` `"File is too big"``;       } else {           if(``move_uploaded_file``(``$_FILES``[``'uploadedfile'``][``'tmp_name'``],` `$target_path``)) {               echo` `"The file <a href=\"``$target_path``\">``$target_path``</a> has been uploaded"``;           } else{               echo` `"There was an error uploading the file, please try again!"``;           }       }   } else {   ``?>   ``   <form enctype="multipart/form-data" action="index.php" method="POST">   <input type="hidden" name="MAX_FILE_SIZE" value="1000" />   <input type="hidden" name="filename" value="``<?php` `print` `genRandomString``();` `?>``.jpg" />   Choose a JPEG to upload (max 1KB):<br/>   <input name="uploadedfile" type="file" /><br />   <input type="submit" value="Upload File" />   </form>   ``<?php` `}` `?>   ``<div id="viewsource"><a href="index-source.html">View sourcecode</a></div>   </div>   </body>   </html>```
 
@@ -366,21 +408,25 @@ Es podria solucionar fent servir una clau pública i privada per encriptar la co
 
 Pujem la imatge i deixem passar la petició, estem amb BurpSuite:
 
-![](file:///C:/Users/pmpol/AppData/Local/Temp/lu10980mefb4.tmp/lu10980mefb7_tmp_8109dc981ec59674.png)  
+![image](https://github.com/PolMuri/OverTheWire---Natas/assets/109922379/75987b96-4a87-41b3-a42e-d5bf7c312af4)
+
 
   
 I ara la nostra image està a la url que se’ns facilita:
 
 
-![](file:///C:/Users/pmpol/AppData/Local/Temp/lu10980mefb4.tmp/lu10980mefb7_tmp_5d94bf4d4a2c556e.png)  
+![image](https://github.com/PolMuri/OverTheWire---Natas/assets/109922379/cdabe104-8836-44c8-8f8d-8b9521b4737e)
+ 
 
 
 I podem veure la «imatge»:
 
 
-![](file:///C:/Users/pmpol/AppData/Local/Temp/lu10980mefb4.tmp/lu10980mefb7_tmp_857d24b41833bbf6.png)  
+![image](https://github.com/PolMuri/OverTheWire---Natas/assets/109922379/9f76a32a-e853-47da-af35-117b868b3bf6)
+ 
 
-![](file:///C:/Users/pmpol/AppData/Local/Temp/lu10980mefb4.tmp/lu10980mefb7_tmp_2fe32a7078e2b902.png)  
+![image](https://github.com/PolMuri/OverTheWire---Natas/assets/109922379/b7b8b077-2354-4f15-8217-60f2b70da87c)
+
 
 Ara el codi font és el següent:
 
@@ -528,7 +574,8 @@ Content-Type: image/jpeg
 Ens dona la URL, hi cliquem però seguim sense veure res:
 
 
-![](file:///C:/Users/pmpol/AppData/Local/Temp/lu10980mefb4.tmp/lu10980mefb7_tmp_1f5d953c92df3a9b.png)  
+![image](https://github.com/PolMuri/OverTheWire---Natas/assets/109922379/428b6754-6fb5-4576-bf25-df2ea6eeda8c)
+ 
 
 Per tant al moment d’enviar la petició hem de canviar el format perquè ens interpreti le PHP:
 
@@ -596,7 +643,8 @@ Content-Type: image/jpeg`
 I ara podem veure el hello world:
 
 
-![](file:///C:/Users/pmpol/AppData/Local/Temp/lu10980mefb4.tmp/lu10980mefb7_tmp_4c2a193f5b11558d.png)  
+![image](https://github.com/PolMuri/OverTheWire---Natas/assets/109922379/576b9157-730a-4a38-9671-75368246fa22)
+ 
 
 hello world!
 
@@ -608,17 +656,20 @@ Preparem que ens executi la comanda amb bash que serà la contrasenya mostrada a
 ``<? echo (exec('cat /etc/natas_webpass/natas13')); ?>``
 
 
-![](file:///C:/Users/pmpol/AppData/Local/Temp/lu10980mefb4.tmp/lu10980mefb7_tmp_f52b5fe8692535dd.png)  
+![image](https://github.com/PolMuri/OverTheWire---Natas/assets/109922379/1a8613e8-495c-47af-afb7-acad04b0ed8f)
+ 
 
 Tornem a modificar el nom random que ens genera, i l’error és que es genera del cantó del client i podem manipular el nom, si vols del cantó del servidor no tindriem res a fer:
 
   
 
-![](file:///C:/Users/pmpol/AppData/Local/Temp/lu10980mefb4.tmp/lu10980mefb7_tmp_392caa4a7dcf3b39.png)  
+![image](https://github.com/PolMuri/OverTheWire---Natas/assets/109922379/a595d889-0084-4ed9-ae74-7a74fc7f8f78)
+
 
   
 
-![](file:///C:/Users/pmpol/AppData/Local/Temp/lu10980mefb4.tmp/lu10980mefb7_tmp_f6c32da126ac2c6f.png)  
+![image](https://github.com/PolMuri/OverTheWire---Natas/assets/109922379/6475b157-b17b-41f9-b430-e7caed1e03e6)
+
 
 
 ```
@@ -678,7 +729,8 @@ Content-Type: image/jpeg`
 
 **L’error** és que l’string random és genera al costat del client no al servidor. Ara ja tenim la contrasenya de natas13:
 
-![](file:///C:/Users/pmpol/AppData/Local/Temp/lu10980mefb4.tmp/lu10980mefb7_tmp_5444a0df36402091.png)  
+![image](https://github.com/PolMuri/OverTheWire---Natas/assets/109922379/458efacf-5b54-46bd-9a8a-b6ec21957a2f)
+
 
 La contrasenya de natas13:
 
@@ -769,7 +821,8 @@ Choose a JPEG to upload (max 1KB):<br/>
 </html>
 
 
-![](file:///C:/Users/pmpol/AppData/Local/Temp/lu10980mefb4.tmp/lu10980mefb7_tmp_6fc68ca3587634a9.png)  
+![image](https://github.com/PolMuri/OverTheWire---Natas/assets/109922379/a4865da1-ccd3-491e-badc-9a1c9c2a79a9)
+
 
 
 Ara hi ha una funció que comprova que pujem una imatge al codi de la pàgina.
@@ -780,7 +833,8 @@ Hem d’investigar el magic numbers, que verifiquen que el fitxer sigui una imat
 Hem de posar el codi ascii als primers bits del fitxer per intentar enganyar-lo:
 
 
-![](file:///C:/Users/pmpol/AppData/Local/Temp/lu10980mefb4.tmp/lu10980mefb7_tmp_993b1afcb68363e9.png)  
+![image](https://github.com/PolMuri/OverTheWire---Natas/assets/109922379/1bb7dc48-6870-4399-82f8-fe0ba7410505)
+
 
   
 
@@ -798,7 +852,8 @@ Ens dona el link, hi cliquem i ja tenim la password, que ve amb el BM (ja que ho
 
   
 
-![](file:///C:/Users/pmpol/AppData/Local/Temp/lu10980mefb4.tmp/lu10980mefb7_tmp_8c7fcf505176ac94.png)  
+![image](https://github.com/PolMuri/OverTheWire---Natas/assets/109922379/f0289e1f-7b65-43c0-92dc-e835090d710f)
+
 
   
 
@@ -852,7 +907,8 @@ Password: <input name="password"><br>
 </html>
 
 
-![](file:///C:/Users/pmpol/AppData/Local/Temp/lu10980mefb4.tmp/lu10980mefb7_tmp_5cba5ae80ce1638b.png)  
+![image](https://github.com/PolMuri/OverTheWire---Natas/assets/109922379/16c90144-a72c-44dc-bdc5-61ba802fd276)
+ 
 
 Hi ha un PHP i hi ha un SQL, per tant haurem de fer un sql injection. EL PHP vigila que hi hagi alguna linia de resposta de l’sql. Si quan fem arribar la query el número de rows és més gran que 0 ens dona accés i si no ens el denega. Hem d’aconseguir algo que faci una query que el sevidor ens doni una resposta i ens generi rows, ja tindrem el codi necessari:
 
@@ -873,7 +929,8 @@ Farem un OR 1=1 perquè no tenim cap dels dos valors, i direm que ens comprovi e
 
 ``" OR 1=1#``
 
-![](file:///C:/Users/pmpol/AppData/Local/Temp/lu10980mefb4.tmp/lu10980mefb7_tmp_78c9a7a2e35a8354.png)  
+![image](https://github.com/PolMuri/OverTheWire---Natas/assets/109922379/74ea13ad-aa76-4a16-9c51-38aa5dd7fa97)
+ 
 
 La query original era:
 
