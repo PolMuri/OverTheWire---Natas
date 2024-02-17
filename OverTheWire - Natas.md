@@ -3,8 +3,8 @@
 
 Cliquem a la url que ens apareix i hi entrem amb les credencials que ens donen:
 
-![](file:///C:/Users/pmpol/AppData/Local/Temp/lu10980mefb4.tmp/lu10980mefb7_tmp_dd636f3b25874ee7.png)  
-
+![image](https://github.com/PolMuri/OverTheWire---Natas/assets/109922379/46820382-c276-423b-b664-54ce91bfc6e6)
+  
 Mirem el codi font i allà trobem la password per el level 1
 
 
