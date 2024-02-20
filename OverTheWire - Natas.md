@@ -943,3 +943,6 @@ La modificada és la següent:
 I **l’error** és que es pot fer l’injecció sql i per corregir-se s’hauria de parsejar utilitzant sentències preparades.
 
 Amb això ja obtenim la password: ``TTkaI7AWG4iDERztBcEyKV7kRXH1EZRB`` 
+
+![image](https://github.com/PolMuri/OverTheWire---Natas/assets/109922379/36b9e181-27d9-428e-a0a5-468335b514fc)
+
