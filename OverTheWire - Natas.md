@@ -941,3 +941,5 @@ La modificada és la següent:
 ``SELECT * FROM users WHERE username = 'nom_usuari' AND password = 'contrasenya' OR 1=1#';``
 
 I **l’error** és que es pot fer l’injecció sql i per corregir-se s’hauria de parsejar utilitzant sentències preparades.
+
+Amb això ja obtenim la password: ``TTkaI7AWG4iDERztBcEyKV7kRXH1EZRB`` 
