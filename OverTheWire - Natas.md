@@ -946,3 +946,346 @@ Amb això ja obtenim la password: ``TTkaI7AWG4iDERztBcEyKV7kRXH1EZRB``
 
 ![image](https://github.com/PolMuri/OverTheWire---Natas/assets/109922379/36b9e181-27d9-428e-a0a5-468335b514fc)
 
+**-Level 15**
+
+![image](https://github.com/PolMuri/OverTheWire---Natas/assets/109922379/83f89b7a-3c50-4a36-9e66-a2b37ab8d144)
+
+
+Si mirem el codi font amb l’enllaç de la pàgina:
+
+<html>  
+<head>  
+<!-- This stuff in the header has nothing to do with the level -->  
+<link rel="stylesheet" type="text/css" href="http://natas.labs.overthewire.org/css/level.css">  
+<link rel="stylesheet" href="http://natas.labs.overthewire.org/css/jquery-ui.css" />  
+<link rel="stylesheet" href="http://natas.labs.overthewire.org/css/wechall.css" />  
+<script src="http://natas.labs.overthewire.org/js/jquery-1.9.1.js"></script>  
+<script src="http://natas.labs.overthewire.org/js/jquery-ui.js"></script>  
+<script src=http://natas.labs.overthewire.org/js/wechall-data.js></script><script src="http://natas.labs.overthewire.org/js/wechall.js"></script>  
+<script>var wechallinfo = { "level": "natas15", "pass": "<censored>" };</script></head>  
+<body>  
+<h1>natas15</h1>  
+<div id="content">  
+<?php  
+  
+/*  
+CREATE TABLE `users` (  
+  `username` varchar(64) DEFAULT NULL,  
+  `password` varchar(64) DEFAULT NULL  
+);  
+*/  
+  
+if(array_key_exists("username", $_REQUEST)) {  
+    $link = mysqli_connect('localhost', 'natas15', '<censored>');  
+    mysqli_select_db($link, 'natas15');  
+  
+    $query = "SELECT * from users where username=\"".$_REQUEST["username"]."\"";  
+    if(array_key_exists("debug", $_GET)) {  
+        echo "Executing query: $query<br>";  
+    }  
+  
+    $res = mysqli_query($link, $query);  
+    if($res) {  
+    if(mysqli_num_rows($res) > 0) {  
+        echo "This user exists.<br>";  
+    } else {  
+        echo "This user doesn't exist.<br>";  
+    }  
+    } else {  
+        echo "Error in query.<br>";  
+    }  
+  
+    mysqli_close($link);  
+} else {  
+?>  
+  
+<form action="index.php" method="POST">  
+Username: <input name="username"><br>  
+<input type="submit" value="Check existence" />  
+</form>  
+<?php } ?>  
+<div id="viewsource"><a href="index-source.html">View sourcecode</a></div>  
+</div>  
+</body>  
+</html>
+
+
+![image](https://github.com/PolMuri/OverTheWire---Natas/assets/109922379/553c724d-b286-42a6-b9a8-e1d908eb50c1)
+
+
+Ens han «xivat» com és la taula d’usuaris en forma de comentari:
+
+![image](https://github.com/PolMuri/OverTheWire---Natas/assets/109922379/da1102af-fcc8-4c0f-b770-62821d8f1338)
+  
+
+
+A la web però veiem que només ens pregunten l’username no la password que no té input, per tant hem d’intentar entrar a l’input del password.
+
+Veiem també que hi ha una connexió a una BD mysql i veiem també el nom de la DB:
+
+ `$link` `=` `mysqli_connect``(``'localhost'``,` `'natas15'``,` `'<censored>'``);`    `mysqli_select_db``(``$link``,` `'natas15'``);`
+
+I veiem la query també que fa l’aplicació:
+
+`$query` `=` `"SELECT * from users where username=\""``.``$_REQUEST``[``"username"``].``"\""``;`
+
+Només pregunta l’usuari i no dona opció per la password.
+
+Sembla que té el mode debug activat cosa que mai s’ha de fer a producció:
+
+ `if(``array_key_exists``(``"debug"``,` `$_GET``)) {           echo` `"Executing query:` `$query``<br>"``;       }`
+
+Haurem de modificar la query per intentar treure el password, farem un script per poder fer això (podríem atacar també amb SQLmap, però mirarem de fer-lo manual i aprenem a fer-lo manual).
+
+Abans però, si busquem l’usuari natas16 per exemple que existeix, interceptem la petició amb burpsuite i veiem que l’atuorització està en Base64 ja que acaba en = i es pot desencriptar:
+
+
+![image](https://github.com/PolMuri/OverTheWire---Natas/assets/109922379/ec8a01f3-1ac6-4aed-8748-018cd1ce2d52)
+
+
+Això és basic auth i no és viable avui en dia:
+
+![image](https://github.com/PolMuri/OverTheWire---Natas/assets/109922379/86a9d7da-aa36-4d7a-bb85-7a6304b02fa3)
+ 
+
+``Authorization: Basic bmF0YXMxNTpUVGthSTdBV0c0aURFUnp0QmNFeUtWN2tSWEgxRVpSQg==``
+
+I amb la Kali Linux desencriptem el Base64 en un moment:
+
+
+![image](https://github.com/PolMuri/OverTheWire---Natas/assets/109922379/3a698798-b242-422a-b142-95db1001c885)
+ 
+
+
+natas 15: TTkaI7AWG4iDERztBcEyKV7kRXH1EZRB
+
+**L’error** és no sanejar l’input de l’usuari ja que s’ha pogut fer un sqlinjection, si no haguessin permès ja la primera ‘ això ja no hauria passat.
+
+Hem trobat la password amb els scripts que hem fet:
+
+![image](https://github.com/PolMuri/OverTheWire---Natas/assets/109922379/4f5a076f-73af-494d-bd83-ed6575dbc754)
+
+
+La contrasenya: TRD7iZrd5gATjj9PkPEuaOlfEjHqj32V
+
+**-Level 16** 
+
+Hi veiem el següent:
+
+![image](https://github.com/PolMuri/OverTheWire---Natas/assets/109922379/b2cd7934-3432-4151-ab5c-b6995a2f3441)
+ 
+
+I si cliquem per veure el codi font:
+
+<html>  
+<head>  
+<!-- This stuff in the header has nothing to do with the level -->  
+<link rel="stylesheet" type="text/css" href="http://natas.labs.overthewire.org/css/level.css">  
+<link rel="stylesheet" href="http://natas.labs.overthewire.org/css/jquery-ui.css" />  
+<link rel="stylesheet" href="http://natas.labs.overthewire.org/css/wechall.css" />  
+<script src="http://natas.labs.overthewire.org/js/jquery-1.9.1.js"></script>  
+<script src="http://natas.labs.overthewire.org/js/jquery-ui.js"></script>  
+<script src=http://natas.labs.overthewire.org/js/wechall-data.js></script><script src="http://natas.labs.overthewire.org/js/wechall.js"></script>  
+<script>var wechallinfo = { "level": "natas16", "pass": "<censored>" };</script></head>  
+<body>  
+<h1>natas16</h1>  
+<div id="content">  
+  
+For security reasons, we now filter even more on certain characters<br/><br/>  
+<form>  
+Find words containing: <input name=needle><input type=submit name=submit value=Search><br><br>  
+</form>  
+  
+  
+Output:  
+<pre>  
+<?  
+$key = "";  
+  
+if(array_key_exists("needle", $_REQUEST)) {  
+    $key = $_REQUEST["needle"];  
+}  
+  
+if($key != "") {  
+    if(preg_match('/[;|&`\'"]/',$key)) {  
+        print "Input contains an illegal character!";  
+    } else {  
+        passthru("grep -i \"$key\" dictionary.txt");  
+    }  
+}  
+?>  
+</pre>  
+  
+<div id="viewsource"><a href="index-source.html">View sourcecode</a></div>  
+</div>  
+</body>  
+</html>
+
+
+![image](https://github.com/PolMuri/OverTheWire---Natas/assets/109922379/f53c41ea-0ca6-4ea1-819b-953ebb487c42)
+  
+
+Ara hi ha un missatge que diu que per raons de seguretat ara filtren més els caràcters.
+
+És una evolució del level 9 i el level 10, però ara ens han prohibit el ; ja que no hi pot haver aquests caràcters i tampoc ens servirà el que vam fer al level 10:
+
+
+![image](https://github.com/PolMuri/OverTheWire---Natas/assets/109922379/659cd2f0-9b13-4c91-922b-c2326a639e8c)
+ 
+
+  
+``if(preg_match('/[;|&`\'"]/',$key))``
+
+
+No han prohibit el $ però i al ser PHP ho aprofitarem. Podem executar qualsevol comanda al sistema perquè no ens han capat el $.
+
+Hem de girar la condició, si no existeix, posem Africans que existeix, si hi afegim una a a darrere, Africansa no tenim resposta. Però, si a Africans hi posem Africans$(grep a /etc/web_pass/natas17) ens retorna Africans, per tant a la que tenim una lletra que no existeix ens tornarà Africans com a paraula de control, si existeix ens tornarà una altra cosa.
+
+Ara farem uns scripts en python com abans i ja tenim la password:
+
+
+![image](https://github.com/PolMuri/OverTheWire---Natas/assets/109922379/151a6913-dbbd-4cdc-8499-d319b12a5cb0)
+  
+
+La contrasenya: XkEuChE0SbnKBvH1RU7ksIb9uuLmI7sd
+
+**L’error** aquí era el mateix que abans, és a dir, no han sanejat el paràmetre dolar, i al no fer-ho podem fer l’execució del codi PHP.
+
+**-Level 17**
+
+![image](https://github.com/PolMuri/OverTheWire---Natas/assets/109922379/8b7caf93-ab3f-4352-aada-096c4e5b5f35)
+  
+
+I el codi font:
+
+<html>
+
+<head>
+
+<!-- This stuff in the header has nothing to do with the level -->
+
+<link rel="stylesheet" type="text/css" href="http://natas.labs.overthewire.org/css/level.css">
+
+<link rel="stylesheet" href="http://natas.labs.overthewire.org/css/jquery-ui.css" />
+
+<link rel="stylesheet" href="http://natas.labs.overthewire.org/css/wechall.css" />
+
+<script src="http://natas.labs.overthewire.org/js/jquery-1.9.1.js"></script>
+
+<script src="http://natas.labs.overthewire.org/js/jquery-ui.js"></script>
+
+<script src=http://natas.labs.overthewire.org/js/wechall-data.js></script><script src="http://natas.labs.overthewire.org/js/wechall.js"></script>
+
+<script>var wechallinfo = { "level": "natas17", "pass": "<censored>" };</script></head>
+
+<body>
+
+<h1>natas17</h1>
+
+<div id="content">
+
+<?php
+
+  
+
+/*
+
+CREATE TABLE `users` (
+
+`username` varchar(64) DEFAULT NULL,
+
+`password` varchar(64) DEFAULT NULL
+
+);
+
+*/
+
+  
+
+if(array_key_exists("username", $_REQUEST)) {
+
+$link = mysqli_connect('localhost', 'natas17', '<censored>');
+
+mysqli_select_db($link, 'natas17');
+
+  
+
+$query = "SELECT * from users where username=\"".$_REQUEST["username"]."\"";
+
+if(array_key_exists("debug", $_GET)) {
+
+echo "Executing query: $query<br>";
+
+}
+
+  
+
+$res = mysqli_query($link, $query);
+
+if($res) {
+
+if(mysqli_num_rows($res) > 0) {
+
+//echo "This user exists.<br>";
+
+} else {
+
+//echo "This user doesn't exist.<br>";
+
+}
+
+} else {
+
+//echo "Error in query.<br>";
+
+}
+
+  
+
+mysqli_close($link);
+
+} else {
+
+?>
+
+  
+
+<form action="index.php" method="POST">
+
+Username: <input name="username"><br>
+
+<input type="submit" value="Check existence" />
+
+</form>
+
+<?php } ?>
+
+<div id="viewsource"><a href="index-source.html">View sourcecode</a></div>
+
+</div>
+
+</body>
+
+</html>
+
+  
+![image](https://github.com/PolMuri/OverTheWire---Natas/assets/109922379/77d15ffb-2398-4b5f-ae74-1a5a8864e888)
+  
+
+  
+És similar als que hem fet abans però no tenim output/resposta, però podem injectar comandes.
+
+Per tenir una resposta diferent si és afirmatiu o no podem. Utilitzarem sleep, ja que quan no hi ha un output hem de fer sleep.
+
+Si l’slipt és amb un usuari que no existeix tenim un temps de resposta curt, si és amb un usuari que existeix tenim un temps de resposta llarg. SI un dels valors és fals directament no tenim temps de resposta.
+
+Ajuntem la tècnica feta servir abans amb l’sleep. Intentarme injectar ``natas18" and pasword LIKE BINARY «%a%» and sleep(1) #`` i aquí obtenim caràcters
+
+I aquí: ``natas18" and password LIKE BINARY "a%" and sleep(1) #`` el password.
+
+Construirem la petició POST amb python. Com als anteriors exercicis, amb el primer script treiem caràcters i amb el segon la contrasenya.
+
+La contrasenya: 8NEDUUxg8kFgPV84uLwvZkGn6okJQ6aqJ
+
+**L’error** ha tornat a ser no sanejar les entrades igual que abans.
+
